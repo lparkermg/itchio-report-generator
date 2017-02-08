@@ -26,5 +26,10 @@ namespace itchio_report_generator.ReportingObjects
             TotalEarnt = totalEarnt;
             TotalViews = totalViews;
         }
+
+        public string GenerateTableRow()
+        {
+            return $"<tr><td>\"{Title}\"<br><img src=\"{CoverUrl}\"></img></td><td>{Description}</td><td>{CreatedAt}</td><td>{PublishedAt}</td><td>{TotalViews}</td><td>{DownloadsCount}</td><td>{PurchasesAmount}</td><td>{TotalEarnt}</td></tr>";
+        }
     }
 }
