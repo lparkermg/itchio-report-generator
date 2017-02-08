@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.ComTypes;
@@ -14,7 +15,7 @@ namespace itchio_report_generator
     internal class Program
     {
         private const string API_BASE = "https://itch.io/api/1/";
-        private const string API_KEY = "APIKEYLALALALALALALLA";
+        private const string API_KEY = "APIKEYHERE";
 
         public static void Main(string[] args)
         {
@@ -22,7 +23,17 @@ namespace itchio_report_generator
             var games = GetGamesList(API_KEY);
             //Extract relavent data.
             var reportObject = GenerateReportItems(games,false);
-            //Produce pdf report.
+            //Produce html report.
+            var report = GenerateReportHeader();
+
+            foreach (var reportItem in reportObject)
+            {
+                report += reportItem.GenerateTableRow();
+            }
+
+            report += GenerateeportFooter();
+
+            File.WriteAllText($"./report-{DateTime.Now.ToString()}.html",report);
             //Console.ReadLine();
         }
 
@@ -61,6 +72,16 @@ namespace itchio_report_generator
             }
 
             return reportItems;
+        }
+
+        private static string GenerateReportHeader()
+        {
+            return "<!DOCTYPE html><header><title>Itch.io Report</title></header><body><table><tr><th></th><th>Description</th><th>Creation Date</th><th>Published Date</th><th>Total Views</th><th>Downloads Count</th><th>Amount of Purchases</th><th>Earnings</th></tr>";
+        }
+
+        private static string GenerateeportFooter()
+        {
+            return "</table></body></html>";
         }
     }
 }
