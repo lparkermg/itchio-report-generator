@@ -29,7 +29,7 @@ namespace itchio_report_generator.ReportingObjects
 
         public string GenerateTableRow()
         {
-            return $"<tr><td>\"{Title}\"<br><img src=\"{CoverUrl}\"></img></td><td>{Description}</td><td>{CreatedAt}</td><td>{PublishedAt}</td><td>{TotalViews}</td><td>{DownloadsCount}</td><td>{PurchasesAmount}</td><td>{TotalEarnt}</td></tr>";
+            return $"<tr><td>\"{Title}\"<br><img src=\"{CoverUrl}\"></img></td><td>{Description}</td><td>{CreatedAt.ToString("dd-MM-yyyy")}</td><td>{PublishedAt.ToString("dd-MM-yyyy")}</td><td>{TotalViews}/{DownloadsCount}/{PurchasesAmount}</td><td>{TotalEarnt}</td></tr>";
         }
     }
 }

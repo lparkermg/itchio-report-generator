@@ -25,7 +25,7 @@ namespace itchio_report_generator
             var reportObject = GenerateReportItems(games,false);
             //Produce html report.
             var report = GenerateReportHeader();
-
+            report += GenerateReportBodyTop();
             foreach (var reportItem in reportObject)
             {
                 report += reportItem.GenerateTableRow();
@@ -76,8 +76,26 @@ namespace itchio_report_generator
 
         private static string GenerateReportHeader()
         {
-            return "<!DOCTYPE html><header><title>Itch.io Report</title></header><body><table><tr><th></th><th>Description</th><th>Creation Date</th><th>Published Date</th><th>Total Views</th><th>Downloads Count</th><th>Amount of Purchases</th><th>Earnings</th></tr>";
+            var html = "<!DOCTYPE html>\n";
+            html += "<head>\n";
+            html += "<title>Itch.io Report</title>\n";
+            html += "<link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">\n";
+            html += "</head>";
+
+            return html;
+
         }
+
+        private static string GenerateReportBodyTop()
+        {
+            var html = "<body>\n";
+            html += "<header class=\"header-main\">\n";
+            html += "</header>\n";
+            html +=
+                "<table><tr><th></th><th>Description</th><th>Creation Date</th><th>Published Date</th><th>Views/Downloads/Purchases</th><th>Earnings</th></tr>";
+            return html;
+        ;
+    }
 
         private static string GenerateeportFooter()
         {
