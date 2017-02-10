@@ -33,7 +33,7 @@ namespace itchio_report_generator
 
             report += GenerateeportFooter();
 
-            File.WriteAllText($"./report-{DateTime.Now.ToString()}.html",report);
+            File.WriteAllText($"./report-{DateTime.Now.ToString("dd-MM-yyyy-hhmmss")}.html",report);
             //Console.ReadLine();
         }
 
@@ -72,6 +72,11 @@ namespace itchio_report_generator
             }
 
             return reportItems;
+        }
+
+        private static void GenerateHtml(string title, List<GameReportItem> reportItems)
+        {
+
         }
 
         private static string GenerateReportHeader()
